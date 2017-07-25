@@ -1,0 +1,27 @@
+body{
+    padding: 50px;
+}
+h1{
+    margin-top: 80px;
+    display: block;
+}
+article {
+   -moz-column-gap: 0.75em;
+   -webkit-column-gap: 0.75em; 
+   column-count: 4;
+   margin: 50px;
+}
+section {
+   display: inline-block;
+   margin:  0.25rem;
+   width:  75%; 
+   background:  #efefef;
+}
+.names{
+    font-size: 30px;
+    display: block;
+}
+.image{
+    overflow: hidden;
+    display: inline-block;
+}
