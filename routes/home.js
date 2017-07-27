@@ -6,7 +6,6 @@ const client = yelp.client(token);
 const request = require('request');
 
 
-
 router.get('/', function (req, res) {
     request.get('http://ipinfo.io/' + req.headers['x-forwarded-for'], {json: true}, function (e, r){
         client.search({
@@ -15,18 +14,23 @@ router.get('/', function (req, res) {
             longitude: r.body.loc.split(",")[1]
         }).then(response => {
             res.render('home', {
-                bars: response.jsonBody.businesses
+                bars: response.jsonBody.businesses,
+                term: 'Bars near you',
+                authenticated: req.isAuthenticated()
             });
+            console.log(req.isAuthenticated());
         });
     });
 });
-router.get('/:place', function(req, res){
+router.get('/search', function(req, res){
     client.search({
         term: "bars",
-        location: req.params.place
+        location: req.query.location
     }).then(response => {
         res.render('home', {
-            bars: response.jsonBody.businesses
+            bars: response.jsonBody.businesses,
+            term: 'Bars in ' + req.query.location,
+            authenticated: req.isAuthenticated()
         });
     });
 });

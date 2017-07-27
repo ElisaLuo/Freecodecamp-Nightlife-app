@@ -1,18 +1,15 @@
 <%include header.ejs %>
 <%include nav.ejs %>
-<h1>Bars Near You</h1>
+<h1><%=term%></h1>
 <article>
-<div class="container">
   <% for(var i = 0; i < bars.length; i++){ %>
   <section>
     <div class="bars">
-      <p class="names"><a href = <%=bars[i].url%>><%= bars[i].name %></a></p>
-      <div class="image"><img src=<%=bars[i].image_url%> width="150px"></img></div>
+      <p class="names"><a href = <%=bars[i].url%>><%= bars[i].name %></a></p></br>
+      <div class="image"><img src=<%=bars[i].image_url%> width="150px"></img></div></br>
       <%= bars[i].location.address1 %></br>
       <%= bars[i].rating %></br>
     </div>
     </section>
   <%}%>
-  
-</div>
 </article>
