@@ -6,7 +6,6 @@ var venueSchema = new Schema({
     title:String,
     link:String,
     image:String,
-    snippet:String,
     totalAttending: { type: Number, default: 0 },
     usersAttending: [String]
 });

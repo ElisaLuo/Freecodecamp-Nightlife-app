@@ -6,6 +6,8 @@ const client = yelp.client(token);
 const home = require("./routes/home");
 const mongoose = require("mongoose");
 const passport = require('passport');
+const session = require("express-session");
+const auth = require("./routes/auth");
 
 mongoose.connect('mongodb://elisal:Pdnlxx021@ds125623.mlab.com:25623/nightlife-app');
 var db = mongoose.connection;
@@ -14,6 +16,11 @@ db.once('open', () => {
   console.log('Connection to the database successful');
 });
 
+app.use(session({
+    secret: 'elktrjosd0983jlwsf08easd90',
+    resave: true,
+    saveUninitialized: true,
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
@@ -23,12 +30,14 @@ app.set('view engine', 'ejs');
 
 //Sets up links for different sites
 app.use("/", home);
-
+app.use("/auth/github", auth);
 
 //Starts port
 var port = process.env.PORT || 3000;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
 });
+
+
 
 

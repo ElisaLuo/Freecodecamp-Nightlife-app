@@ -4,14 +4,10 @@ const router = express.Router();
 const token = "mIDOo4eFVacy6vFMkX9bvn8xfpWu7KW5B-JoREY_CVQN-xnk6LaD6MmRWp5BWWsYx0ME5cdUgd8qbYkkFb09k_zArvbxR1VqqYh37o1KeZMvyBV3aV5jG54WXdR0WXYx";
 const client = yelp.client(token);
 const request = require('request');
-const GitHubStrategy = require('passport-github2');
-const passport = require('passport');
-const User = require('../models/user.model');
-const Venue = require('../models/venue.model');
 
-//Home page setup with "bars near you" using ip address for location
 router.get('/', function (req, res) {
-    req.get('http://ipinfo.io/' + req.headers['x-forwarded-for'], {json: true}, function (e, r){
+     res.header('Access-Control-Allow-Credentials', true);
+    request.get('http://ipinfo.io/' + req.headers['x-forwarded-for'], {json: true}, function (e, r){
         client.search({
             term: "bars",
             latitude:r.body.loc.split(",")[0],
@@ -26,8 +22,6 @@ router.get('/', function (req, res) {
         });
     });
 });
-
-//search function
 router.get('/search', function(req, res){
     client.search({
         term: "bars",
@@ -41,6 +35,9 @@ router.get('/search', function(req, res){
     });
 });
 
-
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
 
 module.exports = router;
