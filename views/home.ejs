@@ -5,10 +5,12 @@
   <% for(var i = 0; i < bars.length; i++){ %>
   <section>
     <div class="bars">
-      <p class="names"><a href = <%=bars[i].url%>><%= bars[i].name %></a></p></br>
-      <div class="image"><img src=<%=bars[i].image_url%> width="150px"></img></div></br>
-       <a id="<%= bars[i].id %>" class="going btn btn-primary"><%=bars[i].totalAttending%> Going</a></br>
-      <%= bars[i].location.address1 %></br>
+      <p class="names"><a href = <%=bars[i].url%>><%= bars[i].title %></a></p></br>
+      <div class="image"><img src=<%=bars[i].image%> width="150px"></img></div></br>
+          <a id="<%= bars[i].id %>" class="going btn btn-primary">
+            <%=bars[i].totalAttending%> Going
+          </a></br>
+      <%= bars[i].address %></br>
       <%= bars[i].rating %></br>
     </div>
     </section>

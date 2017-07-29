@@ -13,8 +13,4 @@ $(document).ready(() => {
             }
         });
     });
-
-    $(' input[type="submit"]').click(function(){
-        localStorage.lastSearch = $('input[type="text"]').val()
-    });
 });

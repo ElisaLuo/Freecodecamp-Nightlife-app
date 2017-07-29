@@ -5,27 +5,45 @@ const token = "mIDOo4eFVacy6vFMkX9bvn8xfpWu7KW5B-JoREY_CVQN-xnk6LaD6MmRWp5BWWsYx
 const client = yelp.client(token);
 const request = require('request');
 const Venue = require('../models/venue.model');
-function getVenues (bars){
-    bars.map((eachBar) => {
-                Venue.findOne({
-                    id: eachBar.id,
-                    title: eachBar.name,
-                    image: eachBar.image_url,
-                    link: eachBar.url
-                }, (err, venue) => {
-                    if(err) return (err);
-                    if(!venue){
-                        var newVenue = new Venue({
-                            id: eachBar.id,
-                            title: eachBar.name
-                        }).save((err, venue) => {
-                            if(err) return err;
-                        })
-                    }
-                })
-            })
-}
 
+function getVenues (bars){
+    var arr=[];
+    return new Promise((resolve, reject) => {
+        var filledArray = bars.jsonBody.businesses.length;
+        bars.jsonBody.businesses.map((eachBar) => {
+            Venue.findOne({
+                id: eachBar.id,
+                title: eachBar.name,
+                image: eachBar.image_url,
+                link: eachBar.mobile_url,
+                snippet: eachBar.snippet_text,
+            }, (err, venue) => {
+                if (err) reject(err)
+                //Create Venue if it doesn't exist.
+                if (!venue) {
+                    var newVenue = new Venue({
+                        id: eachBar.id,
+                        title: eachBar.name,
+                        image: eachBar.image_url,
+                        link: eachBar.mobile_url,
+                        snippet: eachBar.snippet_text,
+                    }).save((err, venue) => {
+                        if (err) reject(err)
+                        arr.push(venue);
+                        if (arr.length === filledArray) {
+                            resolve(arr);
+                        }
+                    })
+                } else {
+                    arr.push(venue);
+                    if (arr.length === filledArray) {
+                        resolve(arr);
+                    }
+                }
+            });
+        });
+    });
+}
 
 router.get('/', function (req, res) {
     res.header('Access-Control-Allow-Credentials', true);
@@ -34,14 +52,14 @@ router.get('/', function (req, res) {
             term: "bars",
             latitude:r.body.loc.split(",")[0],
             longitude: r.body.loc.split(",")[1]
-        }).then(response => {
-            getVenues(response.jsonBody.businesses);
-            res.render('home', {
-                bars: response.jsonBody.businesses,
-                term: 'Bars near you',
-                authenticated: req.isAuthenticated()
+        }).then(bars => {
+            getVenues(bars).then(function(result){
+                res.render('home', {
+                    bars: result,
+                    term: 'Bars near you',
+                    authenticated: req.isAuthenticated()
+                });
             });
-            console.log(req.isAuthenticated());
         });
     });
 });
@@ -49,12 +67,13 @@ router.get('/search', function(req, res){
     client.search({
         term: "bars",
         location: req.query.location
-    }).then(response => {
-        getVenues(response.jsonBody.businesses);
-        res.render('home', {
-            bars: response.jsonBody.businesses,
-            term: 'Bars in ' + req.query.location,
-            authenticated: req.isAuthenticated()
+    }).then(bars => {
+        getVenues(bars).then(function(result){
+            res.render('home', {
+                bars: result,
+                term: 'Bars in ' + req.query.location,
+                authenticated: req.isAuthenticated()
+            });
         });
     });
 });
