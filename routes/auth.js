@@ -11,7 +11,7 @@ const Venue = require('../models/venue.model');
 router.post('/', (req, res) => {
         //First check to see if user is attending that bar, if so decrement
         Venue.findOneAndUpdate({
-            id: "door-fiftyfive-mississauga",
+            id: req.body.barId,
             totalAttending: 1,
             usersAttending: req.user.username || req.user.displayName
         },
@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
             (err, venue) => {
                 if (err) throw err;
                 if (!venue) {
-                    Venue.findOneAndUpdate({ id: "door-fiftyfive-mississauga" },
+                    Venue.findOneAndUpdate({ id: req.body.barId },
                         { $inc: { 'totalAttending': 1 }, $addToSet: { 'usersAttending': req.user.username || req.user.displayName } },
                         { new: true },
                         (err, venue) => {
@@ -32,8 +32,6 @@ router.post('/', (req, res) => {
                 }
             }
         );
-
-  
 });
 
 

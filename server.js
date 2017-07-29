@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const passport = require('passport');
 const session = require("express-session");
 const auth = require("./routes/auth");
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://elisal:Pdnlxx021@ds125623.mlab.com:25623/nightlife-app');
 var db = mongoose.connection;
@@ -21,7 +22,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
-app.use(passport.initialize());
+app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-www-form-urlencoded
+app.use(passport.initialize());//Sets up for passport
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 app.set('port', process.env.PORT || process.env.IP );
