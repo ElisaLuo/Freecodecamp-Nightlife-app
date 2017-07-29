@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const GitHubStrategy = require('passport-github2');
 const passport = require('passport');
+const yelp = require('yelp-fusion');
+const token = "mIDOo4eFVacy6vFMkX9bvn8xfpWu7KW5B-JoREY_CVQN-xnk6LaD6MmRWp5BWWsYx0ME5cdUgd8qbYkkFb09k_zArvbxR1VqqYh37o1KeZMvyBV3aV5jG54WXdR0WXYx";
+const client = yelp.client(token);
 const User = require('../models/user.model');
 const Venue = require('../models/venue.model');
 
 router.post('/', (req, res) => {
-    
         //First check to see if user is attending that bar, if so decrement
         Venue.findOneAndUpdate({
-            id: "bar",
+            id: "door-fiftyfive-mississauga",
             totalAttending: 1,
             usersAttending: req.user.username || req.user.displayName
         },
@@ -18,7 +20,7 @@ router.post('/', (req, res) => {
             (err, venue) => {
                 if (err) throw err;
                 if (!venue) {
-                    Venue.findOneAndUpdate({ id: "bar" },
+                    Venue.findOneAndUpdate({ id: "door-fiftyfive-mississauga" },
                         { $inc: { 'totalAttending': 1 }, $addToSet: { 'usersAttending': req.user.username || req.user.displayName } },
                         { new: true },
                         (err, venue) => {

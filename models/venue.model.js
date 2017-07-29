@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 var venueSchema = new Schema({
     id: String,
     title:String,
-    link:String,
-    image:String,
     totalAttending: { type: Number, default: 0 },
     usersAttending: [String]
 });
