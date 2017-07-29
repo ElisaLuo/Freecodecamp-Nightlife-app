@@ -12,10 +12,9 @@ router.post('/', (req, res) => {
         //First check to see if user is attending that bar, if so decrement
         Venue.findOneAndUpdate({
             id: req.body.barId,
-            totalAttending: 1,
             usersAttending: req.user.username || req.user.displayName
         },
-            { $set: { 'totalAttending': 0 } },
+            { $set: { 'totalAttending': 0, 'usersAttending': []}},
             { new: true },
             (err, venue) => {
                 if (err) throw err;
