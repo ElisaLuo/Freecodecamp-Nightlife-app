@@ -4,6 +4,7 @@ const router = express.Router();
 const token = "mIDOo4eFVacy6vFMkX9bvn8xfpWu7KW5B-JoREY_CVQN-xnk6LaD6MmRWp5BWWsYx0ME5cdUgd8qbYkkFb09k_zArvbxR1VqqYh37o1KeZMvyBV3aV5jG54WXdR0WXYx";
 const client = yelp.client(token);
 const request = require('request');
+const Venue = require('../models/venue.model');
 
 router.get('/', function (req, res) {
      res.header('Access-Control-Allow-Credentials', true);
@@ -13,6 +14,22 @@ router.get('/', function (req, res) {
             latitude:r.body.loc.split(",")[0],
             longitude: r.body.loc.split(",")[1]
         }).then(response => {
+            response.jsonBody.businesses.map((eachBar) => {
+                Venue.findOne({
+                    id: eachBar.id,
+                    title: eachBar.name
+                }, (err, venue) => {
+                    if(err) return (err);
+                    if(!venue){
+                        var newVenue = new Venue({
+                            id: eachBar.id,
+                            title: eachBar.name
+                        }).save((err, venue) => {
+                            if(err) return err;
+                        })
+                    }
+                })
+            })
             res.render('home', {
                 bars: response.jsonBody.businesses,
                 term: 'Bars near you',
