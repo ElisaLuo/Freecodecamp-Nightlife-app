@@ -1,6 +1,6 @@
 {
   "name": "going",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A application which allows you to check bars near you and anywhere you search with yelp fusion",
   "main": "server.js",
   "repository": {
@@ -9,18 +9,18 @@
   },
   "author": "ElisaLuo",
   "dependencies": {
-    "async": "~0.2.8",
-    "express": "~3.2.4",
-    "socket.io": "~0.9.14",
-    "body-parser": "~1.17.2",
-    "ejs": "~2.5.7",
-    "express-session": "~1.15.4",
-    "mongoose": "~4.10.0",
-    "passport": "~0.3.2",
-    "passport-github": "~1.1.0",
-    "passport-github2": "~0.1.0",
-    "request": "~2.81.0",
-    "yelp-fusion": "~1.0.3"
+    "async": "^0.2.8",
+    "express": "^4.15.3",
+    "socket.io": "^0.9.14",
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express-session": "^1.15.4",
+    "mongoose": "^4.10.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
+    "passport-github2": "^0.1.0",
+    "request": "^2.81.0",
+    "yelp-fusion": "^1.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
