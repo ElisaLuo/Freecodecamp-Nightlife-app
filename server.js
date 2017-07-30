@@ -24,7 +24,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
-app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-www-form-urlencoded
 app.use(passport.initialize());//Sets up for passport
 app.use(passport.session());
