@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $('.going').click(function () {
+    $('.goingg').click(function () {
         $.ajax({
             type: "POST",
             url: '/auth/github',
