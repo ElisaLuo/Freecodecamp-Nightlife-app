@@ -1,3 +1,13 @@
+body{
+    background-image: 
+    linear-gradient(
+      rgba(192, 178, 140, 0.3), 
+      rgba(192, 178, 140, 0.3)
+    ),
+    url(http://www.knifebankerscollege.com/images/White-Background-Abstract-Photos.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 h1{
     margin-top: 80px;
     display: block;
@@ -7,7 +17,6 @@ h1{
 .names{
     font-size: 30px;
     vertical-align: top;
-    text-align: center;
     margin-bottom: -15px;
 }
 .image{
@@ -33,4 +42,31 @@ section{
     vertical-align: top;
     float: right;
     margin-right: 20px;
+}
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  font-size: 25px;
+  height: 25px;
+  width: 100px;
+  margin-top: -3px;
+  margin-bottom: 15px;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+.star-ratings-css-top {
+  color: #FFD700;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-ratings-css-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
 }

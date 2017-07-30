@@ -9,6 +9,7 @@ var venueSchema = new Schema({
     rating: Number,
     address: String,
     phone: String,
+    price: String,
     totalAttending: { type: Number, default: 0 },
     usersAttending: [String]
 });

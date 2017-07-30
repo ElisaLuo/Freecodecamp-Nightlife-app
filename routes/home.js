@@ -17,8 +17,9 @@ function getVenues (bars){
                 image: eachBar.image_url,
                 url: eachBar.url,
                 rating: eachBar.rating,
-                address: eachBar.location.address1,
-                phone: eachBar.phone
+                address: eachBar.location.address1 + ", " + eachBar.location.city + ", " + eachBar.location.state + ", " + eachBar.location.country + "  " + eachBar.location.zip_code,
+                phone: eachBar.phone.slice(0, 2) + " (" + eachBar.phone.slice(2, 5) + ") " + eachBar.phone.slice(5, 8) + "-" + eachBar.phone.slice(8, 12),
+                price: eachBar.price
             }, (err, venue) => {
                 if (err) reject(err)
                 //Create Venue if it doesn't exist.
@@ -29,8 +30,9 @@ function getVenues (bars){
                         image: eachBar.image_url,
                         url: eachBar.url,
                         rating: eachBar.rating,
-                        address: eachBar.location.address1,
-                        phone: eachBar.phone
+                        address: eachBar.location.address1 + ", " + eachBar.location.city + ", " + eachBar.location.state + ", " + eachBar.location.country + "  " + eachBar.location.zip_code,
+                        phone: eachBar.phone.slice(0, 2) + " (" + eachBar.phone.slice(2, 5) + ") " + eachBar.phone.slice(5, 8) + "-" + eachBar.phone.slice(8, 12),
+                        price: eachBar.price
                     }).save((err, venue) => {
                         if (err) reject(err)
                         arr.push(venue);
