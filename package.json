@@ -1,13 +1,13 @@
 {
   "name": "going",
   "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
+  "description": "A application which allows you to check bars near you and anywhere you search with yelp fusion",
   "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ElisaLuo/Freecodecamp-Nightlife-app.git"
   },
-  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
+  "author": "ElisaLuo",
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
@@ -23,6 +23,7 @@
     "yelp-fusion": "~1.0.3"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "devDependencies": {},
