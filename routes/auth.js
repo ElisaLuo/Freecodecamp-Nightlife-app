@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
             id: req.body.barId,
             usersAttending: req.user.username || req.user.displayName
         },
-            { $set: { 'totalAttending': 0, 'usersAttending': []}},
+            { $set: {'totalAttending': 0}},
             { new: true },
             (err, venue) => {
                 if (err) throw err;

@@ -15,8 +15,10 @@ function getVenues (bars){
                 id: eachBar.id,
                 title: eachBar.name,
                 image: eachBar.image_url,
-                link: eachBar.mobile_url,
-                snippet: eachBar.snippet_text,
+                url: eachBar.url,
+                rating: eachBar.rating,
+                address: eachBar.location.address1,
+                phone: eachBar.phone
             }, (err, venue) => {
                 if (err) reject(err)
                 //Create Venue if it doesn't exist.
@@ -25,8 +27,10 @@ function getVenues (bars){
                         id: eachBar.id,
                         title: eachBar.name,
                         image: eachBar.image_url,
-                        link: eachBar.mobile_url,
-                        snippet: eachBar.snippet_text,
+                        url: eachBar.url,
+                        rating: eachBar.rating,
+                        address: eachBar.location.address1,
+                        phone: eachBar.phone
                     }).save((err, venue) => {
                         if (err) reject(err)
                         arr.push(venue);
@@ -59,8 +63,12 @@ router.get('/', function (req, res) {
                     term: 'Bars near you',
                     authenticated: req.isAuthenticated()
                 });
+            }).catch(function(err){
+                console.log(err);
             });
-        });
+        }).catch(function(err){
+                console.log(err);
+            });
     });
 });
 router.get('/search', function(req, res){

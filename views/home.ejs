@@ -1,18 +1,30 @@
 <%include header.ejs %>
 <%include nav.ejs %>
 <h1><%=term%></h1>
+<div class="container">
 <article>
   <% for(var i = 0; i < bars.length; i++){ %>
   <section>
     <div class="bars">
+      <div class="imgg">
+        <div class="image"><img src=<%=bars[i].image%> width="150px"></img></div></br>
+      </div>
+      <div class="rest">
       <p class="names"><a href = <%=bars[i].url%>><%= bars[i].title %></a></p></br>
-      <div class="image"><img src=<%=bars[i].image%> width="150px"></img></div></br>
+      <%= bars[i].address %></br>
+      <%= bars[i].phone %> </br>
+      <p>Rating: <%= bars[i].rating %></p></br>
+      </div>
+      <div class="right">
+        <% if(authenticated === true){ %>
           <a id="<%= bars[i].id %>" class="going btn btn-primary">
             <%=bars[i].totalAttending%> Going
           </a></br>
-      <%= bars[i].address %></br>
-      <%= bars[i].rating %></br>
+      <%}%>
+      </div>
     </div>
+    
     </section>
   <%}%>
 </article>
+</div>
