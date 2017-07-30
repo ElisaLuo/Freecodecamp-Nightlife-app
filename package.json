@@ -11,7 +11,16 @@
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
-    "socket.io": "~0.9.14"
+    "socket.io": "~0.9.14",
+    "body-parser": "~1.17.2",
+    "ejs": "~2.5.7",
+    "express-session": "~1.15.4",
+    "mongoose": "~4.10.0",
+    "passport": "~0.3.2",
+    "passport-github": "~1.1.0",
+    "passport-github2": "~0.1.0",
+    "request": "~2.81.0",
+    "yelp-fusion": "~1.0.3"
   },
   "scripts": {
     "start": "node server.js"
