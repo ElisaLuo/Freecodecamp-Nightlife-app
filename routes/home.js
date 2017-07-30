@@ -50,19 +50,26 @@ function getVenues (bars){
         });
     });
 }
-
+function titleCase(str) {
+var rawString = str.toLowerCase().split(" ");
+  var upperCase = [];
+  for(var i = 0; i < rawString.length; i++){
+    upperCase.push(rawString[i][0].toUpperCase() + rawString[i].substring(1, rawString[i].length));
+  }
+  return upperCase.join(" ");
+}
 router.get('/', function (req, res) {
     res.header('Access-Control-Allow-Credentials', true);
     request.get('http://ipinfo.io/' + req.headers['x-forwarded-for'], {json: true}, function (e, r){
         client.search({
-            term: "bars",
+            term: "chinese",
             latitude:r.body.loc.split(",")[0],
             longitude: r.body.loc.split(",")[1]
         }).then(bars => {
             getVenues(bars).then(function(result){
                 res.render('home', {
                     bars: result,
-                    term: 'Bars near you',
+                    term: 'Chinese restaurants near you',
                     authenticated: req.isAuthenticated()
                 });
             }).catch(function(err){
@@ -75,13 +82,13 @@ router.get('/', function (req, res) {
 });
 router.get('/search', function(req, res){
     client.search({
-        term: "bars",
+        term: "chinese",
         location: req.query.location
     }).then(bars => {
         getVenues(bars).then(function(result){
             res.render('home', {
                 bars: result,
-                term: 'Bars in ' + req.query.location,
+                term: 'Chinese restaurants in ' + titleCase(req.query.location),
                 authenticated: req.isAuthenticated()
             });
         });
