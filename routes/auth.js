@@ -40,7 +40,7 @@ router.get('/', passport.authenticate('github'));
 passport.use(new GitHubStrategy({
     clientID: "e5b156bfabd594e3ce1e",
     clientSecret: "e5e13f4d75a3046aa4e1d581fc635702ceadc209",
-    callbackURL: "https://r-u-going.herokuapp.com/auth/github/callback"
+    callbackURL: "https://going-tonight.herokuapp.com/auth/github/callback"
 },
     (accessToken, refreshToken, profile, done) => {
         //create user
