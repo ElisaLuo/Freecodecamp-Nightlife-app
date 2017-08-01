@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var venueSchema = new Schema({
-    id: {type:String, unique: true},
+    id: String,
     title:String,
     image: String,
     url: String,
