@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 
 process.env.NODE_ENV = 'production';
 
-mongoose.connect('mongodb://elisal:Pdnlxx021@ds127963.mlab.com:27963/fcc-nightlife-app');
+mongoose.connect('mongodb://elisal:Pdnlxx021@ds127963.mlab.com:27963/going-tonight');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => {
